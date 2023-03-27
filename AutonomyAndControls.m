@@ -45,7 +45,6 @@ while 1
 % Testing before implementing autonomous instructions/code: 
 
 % MANUAL CONTROLS
-    
     % Move Forward
                 if (key == uparrow)
                     brick.MoveMotor('B', 50);
@@ -75,40 +74,28 @@ while 1
     % Sensing the color blue should result in two beeps
     % Sensing the color green should result in three beeps
 
-                %
+    % Color Red
                 if color == 1
                     pause(1.0);
-    
-                    elseif color == 3
-                        brick.beep();
-                        pause(0.1);
-                        brick.beep();
-                        pause(0.1);
-                        brick.beep();
-                        pause(0.1);
-        
-                    elseif color == 2
-                        brick.beep();
-                        pause(0.1);
-                        brick.beep();
-                        pause(0.1);
-                        
-                    end
                 end
+    
+    % Color Blue
+                elseif color == 2
+                    brick.beep();
+                    pause(0.1);
+                    brick.beep();
+                    pause(0.1);
+                end    
 
-        if(key == 'q')
-            disp('Quit Program');
-            brick.StopMotor('B');
-            brick.StopMotor('C');
-        end
-
-        case 'r'
-            disp('Restart');
-            disp('Press up arrow');
-            startMoving = 0;
-
-        
-
+    % Color Green           
+                elseif color == 3
+                    brick.beep();
+                    pause(0.1);
+                    brick.beep();
+                    pause(0.1);
+                    brick.beep();
+                    pause(0.1);
+                end
     end
 end
 CloseKeyboard();
