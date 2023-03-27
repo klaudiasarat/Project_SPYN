@@ -56,36 +56,11 @@ while 1
                 end
 
 % -------------------------------------------------------------------------
-% As of 3/27/23, the vehicle would not work as expected
-% Testing before implementing autonomous instructions/code:
+% TOUCH SENSOR
 
-% -------------------------------------------------------------------------
-% MANUAL CONTROLS
-% Manual controls will be used until key 'a' is pressed        
-            while(key == 'm') && (key ~= 'a')
 
-    % Move Forward
-                if(key == uparrow)
-                    brick.MoveMotor('BC', 50);
-                end
-                
-    % Move Backward
-                if(key == downarrow)
-                    brick.MoveMotor('BC', -50);
-                end
 
-    % Turn Left
-                if(key == leftarrow)
-                    brick.MoveMotor('B', 45);
-                    brick.MoveMotor('C');
-                end
-                    
-    % Turn Right
-                if(key == rightarrow)
-                    brick.MoveMotor('B');
-                    brick.MoveMotor('C', 45);
-                end
-            
+
 % ------------------------------------------------------------------------- 
 % COLOR DETECTION
     % Sensing the color red should result in a one second pause
@@ -123,6 +98,37 @@ while 1
                     key == 'm';
                 end
 
+% -------------------------------------------------------------------------
+% As of 3/27/23, the vehicle would not work as expected
+% Testing before implementing autonomous instructions/code:
+
+% -------------------------------------------------------------------------
+% MANUAL CONTROLS
+% Manual controls will be used until key 'a' is pressed        
+            while(key == 'm') && (key ~= 'a')
+
+    % Move Forward
+                if(key == uparrow)
+                    brick.MoveMotor('BC', 50);
+                end
+                
+    % Move Backward
+                if(key == downarrow)
+                    brick.MoveMotor('BC', -50);
+                end
+
+    % Turn Left
+                if(key == leftarrow)
+                    brick.MoveMotor('B', 45);
+                    brick.MoveMotor('C');
+                end
+                    
+    % Turn Right
+                if(key == rightarrow)
+                    brick.MoveMotor('B');
+                    brick.MoveMotor('C', 45);
+                end
+            
 
                 
             end
