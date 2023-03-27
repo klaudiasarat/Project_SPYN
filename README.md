@@ -1,6 +1,10 @@
 # Project SPYN: Autonomous Vehicle Build and Simulation
 ## Overview
-The purpose of this project is to design and build a robot using the Lego EV3 kit to simulate an autonomous vehicle that could navigate an unknown maze, safely pick up a passenger model made of cardboard, and transport it to another section of the maze while obeying traffic laws (such as stop signs represented by red tape within the maze). <br><br> This is done by writing software in MATLAB to control the robot’s movement, sensors, and interactions with the passenger model.<br>
+The purpose of this project is to design and build an autonomous vehicle that picks up elderly and disabled people (as represented by a cardboard passenger model), takes them to their destination, and drops them off. For this specific project, an autonomous vehicle prototype must be designed to ensure the safe and efficient transport of a wheelchair-bound model rider from their initial location to their destination within the maze – represented by the blue and green designated areas in the maze, while obeying all “stop signs” – or red stripes on the maze floor. The vehicle must also find its way around the maze with its initial and final destination being the “charging station”, as represented by the yellow square in the maze.<br><br>
+
+This is done by writing software in MATLAB to control the robot’s movement, sensors, and interactions with the passenger model.<br>
+
+[MATLAB Code: Quick Access](AutonomyAndControls.m)<br><br> 
 
 #### Group 10: Members
 - [Klaudia Sarat](https://github.com/klaudiasarat)
