@@ -5,13 +5,13 @@
    %     counter = 0;
 
 
-% ------------------------------------------------------------------------------------------------
-global key
+% -------------------------------------------------------------------------
 
 InitKeyboard();
 
 manualControls = false;
-    % Manual controls will be used in green and blue areas to pick up and drop off passenger model
+    % Manual controls will be used in green and blue areas to pick up and 
+    % drop off passenger model
     % Full manual controls detailed below:
         % Move forward: uparrow
         % Move backward: downarrow
@@ -50,11 +50,11 @@ while 1
                     startMoving = 0;
                 end
 
-% ------------------------------------------------------------------------------------------------
+% -------------------------------------------------------------------------
 % As of 3/27/23, the vehicle would not work as expected
 % Testing before implementing autonomous instructions/code:
 
-% ------------------------------------------------------------------------------------------------
+% -------------------------------------------------------------------------
 % MANUAL CONTROLS
     % Move Forward
                 if (key == uparrow)
@@ -78,7 +78,7 @@ while 1
                     brick.MoveMotor('C', 45);
                 end
             
-% ------------------------------------------------------------------------------------------------        
+% ------------------------------------------------------------------------- 
 % COLOR DETECTION
     % Sensing the color red should result in a one second pause
     % Sensing the color blue should result in two beeps
@@ -92,7 +92,7 @@ while 1
                 end
     
     % Color Blue
-                elseif (color == 2)
+                if (color == 2)
                     brick.beep();
                     pause(0.1);
                     brick.beep();
@@ -100,7 +100,7 @@ while 1
                 end    
 
     % Color Green           
-                elseif (color == 3)
+                if (color == 3)
                     brick.beep();
                     pause(0.1);
                     brick.beep();
@@ -108,6 +108,8 @@ while 1
                     brick.beep();
                     pause(0.1);
                 end
+            end
+
     end
 end
 CloseKeyboard();
