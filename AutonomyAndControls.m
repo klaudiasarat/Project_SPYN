@@ -6,6 +6,7 @@
 
 
 % -------------------------------------------------------------------------
+global key
 
 InitKeyboard();
 
@@ -15,10 +16,13 @@ manualControls = false;
     % Full manual controls detailed below:
         % Move forward: uparrow
         % Move backward: downarrow
-        % Turn left: 
+        % Turn left: leftarrow
+        % Turn right: rightarrow
 
 
-
+% -------------------------------------------------------------------------
+% Vehicle will be moving autonomously until manualControls is true 
+    %
 
 while 1
     pause(0.1);
@@ -30,24 +34,25 @@ while 1
 
     switch key
 
+    % Initial Up Arrow press will start the program
         case 'uparrow'
-            while(startMoving == 0)
+            disp('Autonomous mode: Starting Program')
+            setMotorSpeed('BC', 60);  % Vehicle will drive forward
+            
+    % Autonomous program will run until key 'm' is pressed        
+            while(key == 'a') && (key ~= 'm')
                 
-                if(touch1 == 1)
-                    startMoving = 1;
-                end
-                pause(1);
-
+    % Quit Program - Stop the Vehicle Completely
                 if(key == 'q')
                     disp('Quit Program');
-                    brick.StopMotor('B');
-                    brick.StopMotor('C');
+                    brick.StopMotor('BC');
                 end
             
-                if (key == 'r')
+    % Restart the Program
+                if(key == 'r')
+                    brick.StopMotor('BC');
                     disp('Restart');
                     disp('Press up arrow');
-                    startMoving = 0;
                 end
 
 % -------------------------------------------------------------------------
@@ -56,24 +61,27 @@ while 1
 
 % -------------------------------------------------------------------------
 % MANUAL CONTROLS
+% Manual controls will be used until key 'a' is pressed        
+            while(key == 'm') && (key ~= 'a')
+
     % Move Forward
-                if (key == uparrow)
+                if(key == uparrow)
                     brick.MoveMotor('BC', 50);
                 end
                 
     % Move Backward
-                if (key == downarrow)
+                if(key == downarrow)
                     brick.MoveMotor('BC', -50);
                 end
 
     % Turn Left
-                if (key == leftarrow)
+                if(key == leftarrow)
                     brick.MoveMotor('B', 45);
                     brick.MoveMotor('C');
                 end
                     
     % Turn Right
-                if (key == reightarrow)
+                if(key == rightarrow)
                     brick.MoveMotor('B');
                     brick.MoveMotor('C', 45);
                 end
@@ -87,29 +95,39 @@ while 1
                 brick.SetColorMode(2);
 
     % Color Red
-                if (color == 1)
+                if(color == 1)
                     pause(1.0);
                 end
     
     % Color Blue
-                if (color == 2)
+                if(color == 2)
                     brick.beep();
-                    pause(0.1);
+                    pause(0.05);
                     brick.beep();
-                    pause(0.1);
+                    pause(0.05);
+
+                    % Enter manual controls mode for passenger pickup
+                    key == 'm';  
                 end    
 
     % Color Green           
-                if (color == 3)
+                if(color == 3)
                     brick.beep();
-                    pause(0.1);
+                    pause(0.05);
                     brick.beep();
-                    pause(0.1);
+                    pause(0.05);
                     brick.beep();
-                    pause(0.1);
+                    pause(0.05);
+
+                    % Enter manual controls mode for passenger dropoff
+                    key == 'm';
                 end
+
+
+                
             end
 
     end
 end
+
 CloseKeyboard();
