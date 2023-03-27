@@ -10,7 +10,7 @@ This is done by writing software in MATLAB to control the robot’s movement, se
 - [Klaudia Sarat](https://github.com/klaudiasarat)
 - [Michael Fultz](https://github.com/mtfultz)
 - Tuna Erbay 
-- Zakia Anwar
+- [Zakia Anwar](https://github.com/zakiaanwar123456)
 <br>
 
 ## Disclaimer
