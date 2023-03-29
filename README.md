@@ -18,3 +18,6 @@ All code in this repository is for use by Dr. Michael Clough and Group 10 member
 This is not a solutions guide and should not be treated as such –– however feel free to review the project/code, suggest changes *after the Spring 2023 semester end*, and get inspired!
 
 **Source:** Content consists of MATLAB code written for FSE 100 16108 course at Arizona State University
+https://youtu.be/-43cKPghTQ4
+https://youtu.be/mtmwE470G4A
+https://youtu.be/ruF1eAQcXA4
