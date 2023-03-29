@@ -61,40 +61,35 @@ while 1
 
                 if touch == 1
 
-                    brick.StopMotor('B');
-                    brick.StopMotor('C');
+                    brick.StopMotor('BC');
                     pause(1);
-                    brick.MoveMotor('B', 47.4);
-                    brick.MoveMotor('C', 50);
-                    pause(.75);
-                    brick.StopMotor('B');
-                    brick.StopMotor('C');
+                    brick.MoveMotor('BC', 50);
                     pause(1);
-                    brick.MoveMotor('B', -28);
-                    brick.MoveMotor('C', 25.2);
-                    pause(.86);
-                    brick.StopMotor('B');
-                    brick.StopMotor('C');
-                    pause(0.5);
+                    brick.StopMotor('BC');
+                    pause(1);
+                    brick.MoveMotor('B', -30);
+                    pause(1);
+                    brick.StopMotor('BC');
+                    pause(1);
+
                     distance = brick.UltrasonicDist(4);
                     touch = brick.TouchPressed(3);
 
 
                 elseif distance > 40
                     pause(1);
-                    brick.StopMotor('B');
-                    brick.StopMotor('C');
+                    brick.StopMotor('BC');
                     pause(1);
-                    brick.MoveMotor('B', 30);
-                    brick.MoveMotor('C', -25.2);
-                    pause(.88);
-                    brick.StopMotor('B');
-                    brick.StopMotor('C');
-                    pause(0.5);
-                    brick.MoveMotor('B', -47.4);
-                    brick.MoveMotor('C', -50);
+                    brick.MoveMotor('BC', 30);
+                    pause(1);
+                    brick.StopMotor('BC');
+                    pause(1);
+                    brick.MoveMotor('BC', -50);
                     pause(2);
 
+% -------------------------------------------------------------------------
+% Other cases:
+% -------------------------------------------------------------------------
 
     % Autonomous program will run until key 'm' is pressed        
         case 'm'
