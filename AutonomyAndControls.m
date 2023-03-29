@@ -1,16 +1,23 @@
-% Not using right now - may modify or come back to this later 
-%        startMoving = 0;
- %       rightTurns = 0;
-  %      leftTurns = 0;
-   %     counter = 0;
-
-
 % -------------------------------------------------------------------------
+% As of 3/27/23, the vehicle would not work as expected
+% Testing before implementing autonomous instructions/code:
+% ------------------------------------------------------------------------- 
+
+
 global key
 
 InitKeyboard();
+% brick = ConnectBrick('OLLIE');
+    
+% Set mode to RGB
+    brick.SetColorMode(2,4); 
 
-manualControls = false;
+    startMoving = 0;
+    rightTurns = 0;
+    leftTurns = 0;
+    counter = 0;
+
+manualControls = false; % Not needed yet. Milestone 3
     % Manual controls will be used in green and blue areas to pick up and 
     % drop off passenger model
     % Full manual controls detailed below:
@@ -19,17 +26,19 @@ manualControls = false;
         % Turn left: leftarrow
         % Turn right: rightarrow
 
-
 % -------------------------------------------------------------------------
 % Vehicle will be moving autonomously until manualControls is true 
-    %
+% -------------------------------------------------------------------------
 
 while 1
-    pause(0.1);
+    pause(1);
     distance = brick.UltrasonicDist(4);
     touch = brick.TouchPressed(3);
     touch1 = brick.TouchPressed(1);
-    color = brick.ColorCode(2);
+    color =  brick.ColorRGB(2);
+    disp(color);
+    disp(touch);
+
 
 
     switch key
@@ -56,12 +65,10 @@ while 1
                 end
 
 % -------------------------------------------------------------------------
-% As of 3/27/23, the vehicle would not work as expected
-% Testing before implementing autonomous instructions/code:
-
-% -------------------------------------------------------------------------
 % MANUAL CONTROLS
-% Manual controls will be used until key 'a' is pressed        
+% Manual controls will be used until key 'a' is pressed
+% ------------------------------------------------------------------------- 
+
             while(key == 'm') && (key ~= 'a')
 
     % Move Forward
@@ -74,49 +81,74 @@ while 1
                     brick.MoveMotor('BC', -50);
                 end
 
-
-
 % ------------------------------------------------------------------------- 
 % COLOR DETECTION
     % Sensing the color red should result in a one second pause
     % Sensing the color blue should result in two beeps
     % Sensing the color green should result in three beeps
 
-                brick.SetColorMode(2);
+% RGB are stored in a row vector
+    % color(1) = red values
+    % color(2) = green values            
+    % color(3) = blue values
+% ------------------------------------------------------------------------- 
+    
+        case 'uparrow'
+            while(startMoving == 0)
+                touch = brick.TouchPressed(3);
+
+                color = brick.ColorRGB(2);
+                brick.MoveMotor('B', -50);
+                brick.MoveMotor('C', -50);
+                disp(color);
+
+    % Kill switch to exit loop
+                if touch == 1
+                    brick.StopMotor('BC');
+                    startMoving = 1;
 
     % Color Red
-                if(color == 1)
-                    pause(1.0);
-                end
+                elseif (color(1) > 30 && color(2) < 20 && color(3) < 20)
+                    brick.StopMotor('B');
+                    brick.StopMotor('C');
+                    startMoving = 1;
     
     % Color Blue
-                if(color == 2)
-                    brick.beep();
-                    pause(0.05);
-                    brick.beep();
-                    pause(0.05);
-
-                    % Enter manual controls mode for passenger pickup
-                    key == 'm';  
-                end    
+               elseif (color(1) < 10 && color(2) < 20 && color(3) > 18)
+                    brick.StopMotor('B');
+                    brick.StopMotor('C');
+                    pause(1);
+                    brick.playTone(1000,500,200);
+                    pause(1);
+                    brick.playTone(1000,500,200);
+                    pause(1);
+                    startMoving = 1; 
 
     % Color Green           
-                if(color == 3)
-                    brick.beep();
-                    pause(0.05);
-                    brick.beep();
-                    pause(0.05);
-                    brick.beep();
-                    pause(0.05);
-
-                    % Enter manual controls mode for passenger dropoff
-                    key == 'm';
+                elseif (color(1) < 10 & color(2) > 14 && color(3) < 14)
+                    brick.StopMotor('B');
+                    brick.StopMotor('C');
+                    pause(1);
+                    brick.playTone(1000,500,200);
+                    pause(1);
+                    brick.playTone(1000,500,200);
+                    pause(1);
+                    brick.playTone(1000,500,200);
+                    pause(1);
+                    startMoving = 1;
                 end
-
-
-                
             end
 
+        case 'q'
+            disp('Quit Program');
+            brick.StopMotor('B');
+            brick.StopMotor('C');
+            break;
+
+        case 'r'
+            disp('Restart');
+            disp('Press up arrow');
+            startMoving = 0;
     end
 end
 
