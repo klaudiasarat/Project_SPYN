@@ -48,9 +48,9 @@ while 1
                     brick.StopMotor('B');
                     brick.StopMotor('C');
                     pause(1);
-                    brick.beep(1);
+                    brick.playTone(1000,500,200);
                     pause(1);
-                    brick.beep(1);
+                    brick.playTone(1000,500,200);
                     pause(1);
                     startMoving = 1;
 
@@ -59,11 +59,11 @@ while 1
                     brick.StopMotor('B');
                     brick.StopMotor('C');
                     pause(1);
-                    brick.beep(1);
+                    brick.playTone(1000,500,200);
                     pause(1);
-                    brick.beep(1);
+                    brick.playTone(1000,500,200);
                     pause(1);
-                    brick.beep(1);
+                    brick.playTone(1000,500,200);
                     pause(1);
                     startMoving = 1;
 
