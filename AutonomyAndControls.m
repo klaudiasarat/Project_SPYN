@@ -40,7 +40,6 @@ while 1
     disp(touch);
 
 
-
     switch key
 
     % Initial Up Arrow press will start the program
@@ -48,21 +47,72 @@ while 1
             disp('Autonomous mode: Starting Program')
             setMotorSpeed('BC', 60);  % Vehicle will drive forward
             
+            while(startMoving == 0)
+                touch = brick.TouchPressed(3);
+                distance = brick.UltrasonicDist(4);
+
+                brick.MoveMotor('BC', -50);
+
+% -------------------------------------------------------------------------
+% Distance and Maze Navigation 
+% // FIXME: Algorithm has to be corrected 
+% // FIXME: Simplify code
+% -------------------------------------------------------------------------
+
+                if touch == 1
+
+                    brick.StopMotor('B');
+                    brick.StopMotor('C');
+                    pause(1);
+                    brick.MoveMotor('B', 47.4);
+                    brick.MoveMotor('C', 50);
+                    pause(.75);
+                    brick.StopMotor('B');
+                    brick.StopMotor('C');
+                    pause(1);
+                    brick.MoveMotor('B', -28);
+                    brick.MoveMotor('C', 25.2);
+                    pause(.86);
+                    brick.StopMotor('B');
+                    brick.StopMotor('C');
+                    pause(0.5);
+                    distance = brick.UltrasonicDist(4);
+                    touch = brick.TouchPressed(3);
+
+
+                elseif distance > 40
+                    pause(1);
+                    brick.StopMotor('B');
+                    brick.StopMotor('C');
+                    pause(1);
+                    brick.MoveMotor('B', 30);
+                    brick.MoveMotor('C', -25.2);
+                    pause(.88);
+                    brick.StopMotor('B');
+                    brick.StopMotor('C');
+                    pause(0.5);
+                    brick.MoveMotor('B', -47.4);
+                    brick.MoveMotor('C', -50);
+                    pause(2);
+
+
     % Autonomous program will run until key 'm' is pressed        
-            while(key == 'a') && (key ~= 'm')
+        case 'm'
+            manualControls = true;
+            startMoving = 1;
                 
     % Quit Program - Stop the Vehicle Completely
-                if(key == 'q')
-                    disp('Quit Program');
-                    brick.StopMotor('BC');
-                end
+        case 'q'
+            disp('Quit Program');
+            brick.StopMotor('B');
+            brick.StopMotor('C');
+            break;
             
     % Restart the Program
-                if(key == 'r')
-                    brick.StopMotor('BC');
-                    disp('Restart');
-                    disp('Press up arrow');
-                end
+        case 'r'
+            disp('Restart');
+            disp('Press up arrow');
+            startMoving = 0;
 
 % -------------------------------------------------------------------------
 % MANUAL CONTROLS
@@ -98,8 +148,7 @@ while 1
                 touch = brick.TouchPressed(3);
 
                 color = brick.ColorRGB(2);
-                brick.MoveMotor('B', -50);
-                brick.MoveMotor('C', -50);
+                brick.MoveMotor('BC', -50);
                 disp(color);
 
     % Kill switch to exit loop
@@ -109,14 +158,12 @@ while 1
 
     % Color Red
                 elseif (color(1) > 30 && color(2) < 20 && color(3) < 20)
-                    brick.StopMotor('B');
-                    brick.StopMotor('C');
+                    brick.StopMotor('BC');
                     startMoving = 1;
     
     % Color Blue
                elseif (color(1) < 10 && color(2) < 20 && color(3) > 18)
-                    brick.StopMotor('B');
-                    brick.StopMotor('C');
+                    brick.StopMotor('BC');
                     pause(1);
                     brick.playTone(1000,500,200);
                     pause(1);
@@ -126,8 +173,7 @@ while 1
 
     % Color Green           
                 elseif (color(1) < 10 & color(2) > 14 && color(3) < 14)
-                    brick.StopMotor('B');
-                    brick.StopMotor('C');
+                    brick.StopMotor('BC');
                     pause(1);
                     brick.playTone(1000,500,200);
                     pause(1);
@@ -138,17 +184,6 @@ while 1
                     startMoving = 1;
                 end
             end
-
-        case 'q'
-            disp('Quit Program');
-            brick.StopMotor('B');
-            brick.StopMotor('C');
-            break;
-
-        case 'r'
-            disp('Restart');
-            disp('Press up arrow');
-            startMoving = 0;
     end
 end
 
