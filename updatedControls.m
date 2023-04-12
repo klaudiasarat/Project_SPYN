@@ -1,12 +1,8 @@
-% -------------------------------------------------------------------------
-% As of 3/27/23, the vehicle would not work as expected
-% Testing before implementing autonomous instructions/code:
-% -------------------------------------------------------------------------
-
-
 global key
 
 InitKeyboard();
+
+% Instruction to connect ev3 to matlab within command windowsqqqqqqq
 % brick = ConnectBrick('OLLIE');
 
 % Set mode to RGB
@@ -17,14 +13,15 @@ rightTurns = 0;
 leftTurns = 0;
 counter = 0;
 
-manualControls = false; % Not needed yet. Milestone 3
 % Manual controls will be used in green and blue areas to pick up and
 % drop off passenger model
 % Full manual controls detailed below:
-% Move forward: uparrow
-% Move backward: downarrow
-% Turn left: leftarrow
-% Turn right: rightarrow
+% Move forward: w
+% Move backward: s
+% Turn left: a
+% Turn right: d
+% Lift up: i
+% Lift down: k
 
 
 % -------------------------------------------------------------------------
@@ -35,7 +32,6 @@ while 1
     pause(1);
     distance = brick.UltrasonicDist(4);
     touch = brick.TouchPressed(3);
-    touch1 = brick.TouchPressed(1);
     color =  brick.ColorRGB(2);
     disp(color);
     disp(touch);
@@ -43,28 +39,30 @@ while 1
 
     switch key
 
-        % Initial Up Arrow press will start the program
+        % Up Arrow to start the autonomous mode
         case 'uparrow'
-
+            touch = brick.TouchPressed(3);
 
             while(startMoving == 0)
-                brick.MoveMotor('BC', -50);
+                touch = brick.TouchPressed(3);
+                color = brick.ColorRGB(2);
+                brick.MoveMotor('B', -80);
+                brick.MoveMotor('C', -83);
+                distance = brick.UltrasonicDist(4);
 
-
-                % -------------------------------------------------------------------------
-                % Distance and Maze Navigation
-                % // FIXME: Algorithm has to be corrected
-                % -------------------------------------------------------------------------
-
-                % Kill switch to exit loop
-                if (color(1) > 30 && color(2) < 20 && color(3) < 20)
+                % kill switch
+                if key == 'x'
+                    brick.StopMotor('BC');
+                    startMoving = 1;
+                    % if red
+                elseif (color(1) > 20 && color(2) < 20 && color(3) < 20)
 
                     brick.StopMotor('B');
                     brick.StopMotor('C');
-                    startMoving = 1;
+                    pause(1);
 
                     % if blue
-                elseif (color(1) < 10 && color(2) < 20 && color(3) > 18)
+                elseif (color(1) < 10 && color(2) < 20 && color(3) > 10)
                     brick.StopMotor('B');
                     brick.StopMotor('C');
                     pause(1);
@@ -75,7 +73,7 @@ while 1
                     startMoving = 1;
 
                     % if green
-                elseif (color(1) < 10 & color(2) > 14 && color(3) < 14)
+                elseif (color(1) < 10 && color(2) > 10 && color(3) < 14)
                     brick.StopMotor('B');
                     brick.StopMotor('C');
                     pause(1);
@@ -103,7 +101,7 @@ while 1
                     pause(1);
                     brick.MoveMotor('B', -28);
                     brick.MoveMotor('C', 25.2);
-                    pause(.86);
+                    pause(.7);
                     brick.StopMotor('B');
                     brick.StopMotor('C');
                     pause(0.5);
@@ -118,7 +116,7 @@ while 1
                     pause(1);
                     brick.MoveMotor('B', 30);
                     brick.MoveMotor('C', -25.2);
-                    pause(.88);
+                    pause(.7);
                     brick.StopMotor('B');
                     brick.StopMotor('C');
                     pause(0.5);
@@ -164,31 +162,41 @@ while 1
 
             % -------------------------------------------------------------------------
             % MANUAL CONTROLS
-            % Manual controls will be used until key 'a' is pressed
+            % Manual controls will be used until key 'x' is pressed
             % // FIXME: Needs code still
             % -------------------------------------------------------------------------
 
-            % Autonomous program will run until key 'm' is pressed
+            % move forward
         case 'w'
             brick.MoveMotor('BC', -50);
             startMoving = 0;
-
+            % move backward
         case 's'
             brick.MoveMotor('BC', 50);
             startMoving = 0;
-
+            % turn left
         case 'a'
             brick.MoveMotor('B', -28);
             brick.MoveMotor('C', 25.2);
             startMoving = 0;
-
+            % turn right
         case 'd'
             brick.MoveMotor('B', -28);
             brick.MoveMotor('C', 25.2);
             startMoving = 0;
-
+            % lift up
+        case 'i'
+            brick.MoveMotor('A', 30);
+            
+            startMoving = 0;
+            % lift down
+        case 'k'
+            brick.MoveMotor('A', -50);
+            
+            startMoving = 0;
+            % exit autonomous mode
         case 'x'
-            brick.StopMotor('BC');
+            brick.StopMotor('ABC');
             startMoving = 0;
 
 
