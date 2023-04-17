@@ -10,8 +10,8 @@ This is done by writing software in MATLAB to control the robot’s movement, se
 - [Maze Navigation](https://youtu.be/S_MZu_JJeM4)<br>
 - [Red Color Detection & Stop](https://youtu.be/-43cKPghTQ4)<br>
 - [Blue Color Detection & Beeps](https://youtu.be/mtmwE470G4A)<br>
-- [Green Color Dection & Beeps](https://youtu.be/ruF1eAQcXA4)<br><br>
-- [Remote Control & Navigation](https://www.youtube.com/watch?v=3LnaxcukY-g)
+- [Green Color Dection & Beeps](https://youtu.be/ruF1eAQcXA4)<br>
+- [Remote Control & Navigation](https://www.youtube.com/watch?v=3LnaxcukY-g)<br><br>
 
 #### Group 10: Members
 - [Klaudia Sarat](https://github.com/klaudiasarat)
