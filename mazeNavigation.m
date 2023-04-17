@@ -20,8 +20,9 @@ while 1
         case 'uparrow'
             while(startMoving == 0)
                 pause(.1);
+                brick.MoveMotor('BC', -80);
                 brick.MoveMotor('B', -80);
-                brick.MoveMotor('C', -81);
+                brick.MoveMotor('C', -81.5);
                 
                 touch = brick.TouchPressed(3);
                 %
@@ -36,27 +37,29 @@ while 1
                 elseif touch == 1
                     % stop moving
                     brick.StopMotor('BC');
-                    pause(.5);
+                    pause(.3);
 
                     % reverse to get away from wall
                     brick.MoveMotor('B', 80);
                     brick.MoveMotor('C', 81.2);
-                    pause(.45);
+                    pause(.35);
 
                     % stop before turning left
                     brick.StopMotor('BC');
-                    pause(.3);
+                    pause(.2);
 
                     % turn left
-                    brick.MoveMotor('B', -98);
-                    brick.MoveMotor('C', 100);
-                    pause(.15);
+                    brick.MoveMotor('B', -75);
+                    brick.MoveMotor('C', 75);
+                    pause(.21);
 
                     % stop turning left
                     brick.StopMotor('BC');
                     pause(0.3);
 
-                    
+                    brick.MoveMotor('B', -80);
+                    brick.MoveMotor('C', -82);
+                    pause(.7);
 
 
                 elseif distance > 40
@@ -66,18 +69,18 @@ while 1
 
                     % stop before turning
                     brick.StopMotor('BC');
-                    pause(.22);
+                    pause(.23);
 
                     % turn right
                     brick.MoveMotor('B', 98);
                     brick.MoveMotor('C', -100);
-                    pause(.2);
+                    pause(.222);
                     brick.StopMotor('BC');
                     pause(0.3);
 
                     % go forward
                     brick.MoveMotor('B', -80);
-                    brick.MoveMotor('C', -81);
+                    brick.MoveMotor('C', -82);
                     pause(.7);
 
 
