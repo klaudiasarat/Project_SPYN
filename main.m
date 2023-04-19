@@ -34,7 +34,7 @@ while 1
                 color = brick.ColorRGB(2);
                 distance = brick.UltrasonicDist(4);
 
-
+                % kill switch
                 if key == 'x'
                     brick.StopMotor('BC');
                     startMoving = 1;
