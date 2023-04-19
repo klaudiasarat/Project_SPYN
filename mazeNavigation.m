@@ -3,11 +3,15 @@ InitKeyboard();
 % brick = ConnectBrick('OLLIE');
 % C motor is left
 % B motor is right
+% A motor is lift
 
-startMoving = 0;
-rightTurns = 0;
-leftTurns = 0;
-counter = 0;
+% Sensors:
+% 1 = touch
+% 2 = color
+% 3 = touch
+% 4 = distance
+
+
 
 while 1
     pause(0.1);
@@ -19,12 +23,13 @@ while 1
 
         case 'uparrow'
             while(startMoving == 0)
-                pause(.1);
+                pause(.4);
                 brick.MoveMotor('BC', -80);
                 brick.MoveMotor('B', -80);
                 brick.MoveMotor('C', -81.5);
                 
                 touch = brick.TouchPressed(3);
+                touch1 = brick.TouchPressed(1);
                 %
 
 
@@ -34,7 +39,7 @@ while 1
                 if key == 'x'
                     brick.StopMotor('BC');
                     startMoving = 1;
-                elseif touch == 1
+                elseif (or(touch == 1, touch1 == 1))
                     % stop moving
                     brick.StopMotor('BC');
                     pause(.3);
