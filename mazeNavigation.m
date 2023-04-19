@@ -10,7 +10,7 @@ InitKeyboard();
 % 2 = color
 % 3 = touch
 % 4 = distance
-
+startMoving = 0;
 
 
 while 1
@@ -26,7 +26,7 @@ while 1
                 pause(.4);
                 brick.MoveMotor('BC', -80);
                 brick.MoveMotor('B', -80);
-                brick.MoveMotor('C', -81.5);
+                brick.MoveMotor('C', -83);
                 
                 touch = brick.TouchPressed(3);
                 touch1 = brick.TouchPressed(1);
@@ -79,7 +79,7 @@ while 1
                     % turn right
                     brick.MoveMotor('B', 98);
                     brick.MoveMotor('C', -100);
-                    pause(.222);
+                    pause(.242);
                     brick.StopMotor('BC');
                     pause(0.3);
 
